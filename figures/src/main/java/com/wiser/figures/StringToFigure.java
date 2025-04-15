@@ -38,6 +38,7 @@ public class StringToFigure {
                     );
                 }
 
+
             } else if (figureType.equalsIgnoreCase("rectangle")) {
                 double[] rectangleSides = new double[2];
                 for (int i = 0; i < 2; i++) {
