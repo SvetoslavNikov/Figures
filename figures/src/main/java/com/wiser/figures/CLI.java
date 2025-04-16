@@ -10,6 +10,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+//CLI is not finished
+
 public class CLI {
     private static final Scanner scanner = new Scanner(System.in);
     private static final List<Figure> figureList = new ArrayList<>();

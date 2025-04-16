@@ -1,5 +1,8 @@
 package com.wiser.figures;
 
+import com.wiser.figures.figuresClasses.Circle;
+import com.wiser.figures.figuresClasses.Rectangle;
+import com.wiser.figures.figuresClasses.Triangle;
 import org.junit.jupiter.api.Test;
 
 import java.io.ByteArrayInputStream;

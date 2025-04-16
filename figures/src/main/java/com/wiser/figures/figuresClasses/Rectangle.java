@@ -1,4 +1,6 @@
-package com.wiser.figures;
+package com.wiser.figures.figuresClasses;
+
+import com.wiser.figures.Figure;
 
 public class Rectangle implements Figure,Cloneable{
     private final double sideA;

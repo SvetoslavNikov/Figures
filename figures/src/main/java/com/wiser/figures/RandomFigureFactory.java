@@ -1,5 +1,9 @@
 package com.wiser.figures;
 
+import com.wiser.figures.figuresClasses.Circle;
+import com.wiser.figures.figuresClasses.Rectangle;
+import com.wiser.figures.figuresClasses.Triangle;
+
 import java.util.Random;
 
 public class RandomFigureFactory implements FigureFactory{

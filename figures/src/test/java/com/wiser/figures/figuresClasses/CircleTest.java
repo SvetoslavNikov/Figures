@@ -1,5 +1,6 @@
-package com.wiser.figures;
+package com.wiser.figures.figuresClasses;
 
+import com.wiser.figures.figuresClasses.Circle;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
