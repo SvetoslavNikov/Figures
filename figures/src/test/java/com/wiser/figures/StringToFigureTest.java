@@ -5,8 +5,8 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertInstanceOf;
 import static org.junit.jupiter.api.Assertions.assertThrows;
-
-public class TestStringToFigure {
+//FINISHED
+public class StringToFigureTest {
 
     //cases for negative nums, incorrect sizes and overflow
     //are covered in the tests for each object's constructor

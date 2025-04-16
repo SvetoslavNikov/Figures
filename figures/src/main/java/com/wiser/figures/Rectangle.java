@@ -19,7 +19,7 @@ public class Rectangle implements Figure,Cloneable{
 
     @Override
     public double perimeter() {
-        return sideA*sideB;
+        return 2*(sideA+sideB);
     }
 
     @Override

@@ -1,6 +1,5 @@
 package com.wiser.figures;
 
-interface Figure {
+public interface Figure {
     double perimeter();
-    String toString();
 }

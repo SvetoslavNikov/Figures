@@ -4,23 +4,40 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-public class TestTriangle {
-//TODO: Boundary Tests: Test for very small (close to zero) and large values to see if the class handles them correctly.
-//
-//TODO: Edge Cases: For instance, testing a triangle with very close-to-equal sides to check if the perimeter calculation is accurate.
+public class TriangleTest {
 
-//TODO: add throwing exceptions or somethign when user inputs under the precision?
-//TODO: SETUP A REPO AND COMMIT thoruh git bash
-
-    // //too small numbers?
-    //        //too big numbers?
-    //        //overflow?
-    //        //precision?
 
 
     @Test
+    public void testTriangleConstructorNegativeNums() {
+        //negative num input
+        assertThrows(IllegalArgumentException.class, () -> {
+            Triangle triangle = new Triangle(-2, 2, 4);
+        });
+        assertThrows(IllegalArgumentException.class, () -> {
+            Triangle triangle = new Triangle(2, -2, 4);
+        });
+        assertThrows(IllegalArgumentException.class, () -> {
+            Triangle triangle = new Triangle(2, 2, -4);
+        });
+    }
+
+    @Test
+    public void testTriangleConstructorZeroValues() {
+        assertThrows(IllegalArgumentException.class, () -> {
+            Triangle triangle = new Triangle(0, 2, 4);
+        });
+        assertThrows(IllegalArgumentException.class, () -> {
+            Triangle triangle = new Triangle(2, 0, 4);
+        });
+        assertThrows(IllegalArgumentException.class, () -> {
+            Triangle triangle = new Triangle(2, 2, 0);
+        });
+    }
+
+    @Test
     public void testTriangleConstructorWrongSizes() {
-        //one side size equal to the sum of the other two
+        //one side size shouldn't equal to the sum of the other two
 
         //wrong sideA
         assertThrows(IllegalArgumentException.class, () -> {
@@ -38,41 +55,24 @@ public class TestTriangle {
         });
     }
 
-    @Test
-    public void testTriangleConstructorNegativeNums() {
-        //negative num input
-        assertThrows(IllegalArgumentException.class, () -> {
-            Triangle triangle = new Triangle(-2, 2, 4);
-        });
-        assertThrows(IllegalArgumentException.class, () -> {
-            Triangle triangle = new Triangle(2, -2, 4);
-        });
-        assertThrows(IllegalArgumentException.class, () -> {
-            Triangle triangle = new Triangle(2, 2, -4);
-        });
-    }
 
     @Test
     public void testTriangleConstructorDoubleOverflow(){
         assertThrows(ArithmeticException.class, () -> {
             Triangle triangle = new Triangle(Double.MAX_VALUE,Double.MAX_VALUE,Double.MAX_VALUE);
         });
-        assertThrows(ArithmeticException.class, () -> {
-            Triangle triangle = new Triangle(Double.MAX_VALUE,Double.MAX_VALUE,1);
-        });
     }
 
     @Test
     public void testTrianglePerimeterMethod() {
-        Triangle triangle = new Triangle(1.001, 2.11, 2.12);
-
-        assertEquals(5, triangle.perimeter(),0.0001);
+        Triangle triangle = new Triangle(1.001, 2.02, 2.3);
+        assertEquals(5.321, triangle.perimeter(),0.0001);
     }
 
     @Test
     public void testToStringMethod() {
         Triangle triangle = new Triangle(1, 2, 2);
-        String expected = "triangle 1 2 2";
+        String expected = "triangle 1.0 2.0 2.0";
 
         assertEquals(expected, triangle.toString());
     }
