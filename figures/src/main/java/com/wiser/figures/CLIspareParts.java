@@ -1,5 +1,7 @@
 package com.wiser.figures;
 
+//Here I store some parts of first versions of cli
+//don't read it
 public class CLIspareParts {
 
 //
@@ -30,6 +32,14 @@ public class CLIspareParts {
 ////        return message + triangle + circle + rectangle;
 ////    }
 //
+//    public static String figuresListToString(List<Figure> figures){
+//        StringToFigure stringToFigure = new StringToFigure();
+//        StringBuilder stringBuilder = new StringBuilder();
+//        for(Figure figure: figures){
+//            stringBuilder.append(figure.toString()+"\n");
+//        }
+//        return stringBuilder.toString();
+//    }
 //
 // welcome + show main commands (create,delete,duplicate, delete)
 //        //choose create method + provide input
@@ -84,7 +94,7 @@ public class CLIspareParts {
 //
 //            figureList.add(figureFactory.create());
 //        }
-//        //----------------------------------------------------------------------------------------------------------------//
+//
 //        //DELETE----------------------------------------------------------------------------------------------------------------//
 //        else if (answer.equalsIgnoreCase("delete")) {
 //            System.out.println("Choose a figure you want to delete and write its String representation\n" +
@@ -100,14 +110,7 @@ public class CLIspareParts {
 //    }
 //
 //
-//    public static String figuresListToString(List<Figure> figures){
-//        StringToFigure stringToFigure = new StringToFigure();
-//        StringBuilder stringBuilder = new StringBuilder();
-//        for(Figure figure: figures){
-//            stringBuilder.append(figure.toString()+"\n");
-//        }
-//        return stringBuilder.toString();
-//    }
+
 //
 //    public static boolean deleteFigureFromList(List<Figure> figures, String figureToBeDeleted){
 //        StringToFigure stringToFigure = new StringToFigure();
@@ -128,3 +131,5 @@ public class CLIspareParts {
 ///
 //
 }
+
+

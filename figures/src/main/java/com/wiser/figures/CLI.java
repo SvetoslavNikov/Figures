@@ -28,10 +28,10 @@ public class CLI {
             String command = scanner.nextLine().toLowerCase();
             switch (command) {
                 case "create":
-                    //createFigures();
+                    createFigures();
                     break;
                 case "ls":
-                    //printFiguresList();
+                    printFiguresList();
                     break;
                 case "delete":
                     //deleteFigure();
@@ -49,6 +49,8 @@ public class CLI {
     }
 
 
+
+
     private static void printMainMenu() {
         System.out.println("\nmain menu:");
         System.out.println("> create");
@@ -60,4 +62,87 @@ public class CLI {
         System.out.print("\nenter command: ");
     }
 
+    //TODO: finish the method
+
+    private static void createFigures() {
+        System.out.println("\nChoose a method for creating figures:");
+        System.out.println("> random");
+        System.out.println("> stdin");
+        System.out.println("> file");
+        System.out.print("\nenter method: ");
+
+        String chosenMethod = scanner.nextLine().toLowerCase().trim();
+        FigureFactory figureFactory = createFactoryForChosenMethod(chosenMethod);
+
+        if (figureFactory == null) {
+            System.out.println("invalid method, returning to the main menu");
+            return;
+        }
+        //...
+        return;
+    }
+
+    //TODO: finish the method
+    public static FigureFactory createFactoryForChosenMethod(String chosenMethod) {
+        if (chosenMethod.isEmpty()) {
+            return null;
+        }
+
+        if (chosenMethod.equals("random")) {
+            return new RandomFigureFactory();
+        }
+
+        if (chosenMethod.equals("stdin")) {
+            System.out.println(instructionsForStdinInput());
+
+        }
+
+        if (chosenMethod.equals("file")) {
+
+        }
+
+        return null;
+    }
+
+
+    public static String instructionsForStdinInput() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("> Ok, create a shape\n");
+        sb.append("> Type figure type + measurements, each on a new line\n");
+        sb.append("> Just like in the following examples:\n\n");
+
+        sb.append("   /\\   \n");
+        sb.append("  /  \\  \n");
+        sb.append(" /____\\\n");
+        sb.append("triangle 20.1 20.2 20.3\n\n");
+
+        sb.append("  ****  \n");
+        sb.append(" *    * \n");
+        sb.append("  ****  \n");
+        sb.append("circle 5.5\n\n");
+
+        sb.append(" +----+ \n");
+        sb.append(" |    | \n");
+        sb.append(" +----+ \n");
+        sb.append("rectangle 10.1 20.2\n");
+
+        return sb.toString();
+    }
+
+    private static void printFiguresList() {
+        if(figureList.isEmpty()){
+            System.out.println("there are no figures to display.");
+            return;
+        }
+
+        StringToFigure stringToFigure = new StringToFigure();
+        for (int i = 0; i < figureList.size(); i++) {
+            System.out.println(i + ". - "+ figureList.get(i).toString());
+        }
+    }
+
+    //TODO: finish other methods
+
+
 }
+
