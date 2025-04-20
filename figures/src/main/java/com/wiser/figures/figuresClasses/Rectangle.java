@@ -2,7 +2,7 @@ package com.wiser.figures.figuresClasses;
 
 import com.wiser.figures.Figure;
 
-public class Rectangle implements Figure,Cloneable{
+public class Rectangle implements Figure{
     private final double sideA;
     private final double sideB;
 
@@ -30,7 +30,7 @@ public class Rectangle implements Figure,Cloneable{
     }
 
     @Override
-    protected Object clone() throws CloneNotSupportedException {
+    public Figure clone(){
         return new Rectangle(this.getSideA(), this.getSideB());
     }
 

@@ -2,7 +2,7 @@ package com.wiser.figures.figuresClasses;
 
 import com.wiser.figures.Figure;
 
-public class Triangle implements Figure, Cloneable {
+public class Triangle implements Figure{
 
     private final double sideA;
     private final double sideB;
@@ -39,7 +39,7 @@ public class Triangle implements Figure, Cloneable {
     }
 
     @Override
-    protected Object clone() throws CloneNotSupportedException {
+    public Figure clone(){
         return new Triangle(this.getSideA(),this.getSideB(),this.getSideC());
     }
 

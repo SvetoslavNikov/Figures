@@ -25,4 +25,8 @@ public class StreamFigureFactory implements FigureFactory {
                 throw new RuntimeException("No more figures in the stream");
             }
     }
+
+    public void close(){
+        scanner.close();
+    }
 }

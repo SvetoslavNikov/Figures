@@ -41,7 +41,7 @@ public class CLIspareParts {
 //        return stringBuilder.toString();
 //    }
 //
-// welcome + show main commands (create,delete,duplicate, delete)
+// welcome
 //        //choose create method + provide input
 //
 //        List<Figure> figureList = new ArrayList<>();

@@ -2,7 +2,7 @@ package com.wiser.figures.figuresClasses;
 
 import com.wiser.figures.Figure;
 
-public class Circle implements Figure,Cloneable {
+public class Circle implements Figure{
 
     private final double radius;
 
@@ -29,7 +29,7 @@ public class Circle implements Figure,Cloneable {
     }
 
     @Override
-    protected Object clone() throws CloneNotSupportedException {
+    public Figure clone(){
         return new Circle(this.radius);
     }
 
