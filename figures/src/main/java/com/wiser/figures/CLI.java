@@ -87,25 +87,48 @@ public class CLI {
         }
 
 
-        for (int i = 0; i < count; i++) {
-            try {
-                Figure figure = factory.create();
-                if (figure != null) {
-                    figureList.add(figure);
-                    System.out.println("created: " + figure);
-                }
-            } catch (RuntimeException e) {
-                System.out.println("error creating figure: " + e.getMessage());
-                System.out.print("continue creating figures? (y/n): ");
-                if (!scanner.nextLine().trim().toLowerCase().startsWith("y")) {
-                    break;
+        if(factory instanceof RandomFigureFactory) {
+            for (int i = 0; i < count; i++) {
+                try {
+                    Figure figure = factory.create();
+                    if (figure != null) {
+                        figureList.add(figure);
+                        System.out.println("created: " + figure);
+                    }
+                } catch (RuntimeException e) {
+                    System.out.println("error creating figure: " + e.getMessage());
+                    System.out.print("continue creating figures? (y/n): ");
+                    if (!scanner.nextLine().trim().toLowerCase().startsWith("y")) {
+                        break;
+                    }
                 }
             }
         }
 
-        if (factory instanceof StreamFigureFactory) {
-            ((StreamFigureFactory) factory).close();
+        if(factory instanceof StreamFigureFactory){
+            for (int i = 0; i < count; i++) {
+                StringToFigure stringToFigure = new StringToFigure();
+                try {
+                    Figure figure = stringToFigure.createFrom(scanner.nextLine());
+                    if (figure != null) {
+                        figureList.add(figure);
+                        System.out.println("created: " + figure);
+                    }
+                } catch (RuntimeException e) {
+                    System.out.println("error creating figure: " + e.getMessage());
+                    System.out.print("continue creating figures? (y/n): ");
+                    if (!scanner.nextLine().trim().toLowerCase().startsWith("y")) {
+                        break;
+                    } else {
+                        count ++;
+                    }
+                }
+            }
         }
+
+//        if (factory instanceof StreamFigureFactory) {
+//            ((StreamFigureFactory) factory).close();
+//        }
 
         System.out.println("created " + figureList.size() + " figures.");
     }
