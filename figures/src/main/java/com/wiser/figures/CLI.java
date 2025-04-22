@@ -1,16 +1,13 @@
 package com.wiser.figures;
 
 import java.io.*;
-import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
-import java.nio.file.InvalidPathException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-//CLI is not finished
 
 public class CLI {
     private static final Scanner scanner = new Scanner(System.in);
@@ -34,10 +31,12 @@ public class CLI {
                     printFiguresList();
                     break;
                 case "delete":
-                    //deleteFigure();
+                    deleteFigure();
                     break;
+                case "duplicate":
+                    duplicateFigure();
                 case "save":
-                    //saveFiguresListToFile();
+                    saveFiguresToFile();
                     break;
                 case "exit":
                     System.out.println("thank you for using Figure, bye!");
@@ -59,8 +58,6 @@ public class CLI {
         System.out.println("> exit");
         System.out.print("\nenter command: ");
     }
-
-    //TODO: finish the method
 
     private static void createFigures() {
         System.out.println("\nChoose a method for creating figures:");
@@ -89,7 +86,7 @@ public class CLI {
             return;
         }
 
-        // Create the figures
+
         for (int i = 0; i < count; i++) {
             try {
                 Figure figure = factory.create();
@@ -245,7 +242,7 @@ private static void printFiguresList() {
 
     StringToFigure stringToFigure = new StringToFigure();
     for (int i = 0; i < figureList.size(); i++) {
-        System.out.println(i + ". - " + figureList.get(i).toString());
+        System.out.println(i + ". - " + figureList.get(i));
     }
 }
 
