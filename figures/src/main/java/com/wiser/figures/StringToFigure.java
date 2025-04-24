@@ -53,7 +53,7 @@ public class StringToFigure {
                 }
             }
 
-            //this is like writing new Rectangle(args[0], args[1]), maybe I should change the constructors to accepts double arr?
+            //this is like new Rectangle(args[0], args[1])
             return (Figure) allArgsConstructor.newInstance(Arrays.stream(args).boxed().toArray(Double[]::new));
 
         } catch (Exception e) {

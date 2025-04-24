@@ -4,7 +4,6 @@ import java.io.InputStream;
 import java.util.Scanner;
 
 
-//TODO fix return
 public class StreamFigureFactory implements FigureFactory {
 
     private final Scanner scanner;

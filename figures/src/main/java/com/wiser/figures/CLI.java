@@ -35,11 +35,13 @@ public class CLI {
                     break;
                 case "duplicate":
                     duplicateFigure();
+                    break;
                 case "save":
                     saveFiguresToFile();
                     break;
                 case "exit":
                     System.out.println("thank you for using Figure, bye!");
+                    CLIrunning = false;
                     break;
                 default:
                     System.out.println("unknown command. please choose command from the menu.");
@@ -86,51 +88,36 @@ public class CLI {
             return;
         }
 
-
-        if(factory instanceof RandomFigureFactory) {
-            for (int i = 0; i < count; i++) {
-                try {
-                    Figure figure = factory.create();
-                    if (figure != null) {
-                        figureList.add(figure);
-                        System.out.println("created: " + figure);
-                    }
-                } catch (RuntimeException e) {
-                    System.out.println("error creating figure: " + e.getMessage());
-                    System.out.print("continue creating figures? (y/n): ");
-                    if (!scanner.nextLine().trim().toLowerCase().startsWith("y")) {
-                        break;
-                    }
+        int createdCount = 0;
+        for (int i = 0; i < count; i++) {
+            try {
+                Figure figure = factory.create();
+                if (figure != null) {
+                    figureList.add(figure);
+                    System.out.println("created: " + figure);
+                    createdCount++;
+                }
+            } catch (RuntimeException e) {
+                System.out.println("error creating figure: " + e.getMessage());
+                System.out.print("continue creating figures? (y/n): ");
+                if (!scanner.nextLine().trim().toLowerCase().startsWith("y")) {
+                    break;
+                }
+                // don't increment i if using stdin method cus I want to retry the current figure input
+                if (chosenMethod.equals("stdin")) {
+                    i--;
                 }
             }
         }
 
-        if(factory instanceof StreamFigureFactory){
-            for (int i = 0; i < count; i++) {
-                StringToFigure stringToFigure = new StringToFigure();
-                try {
-                    Figure figure = stringToFigure.createFrom(scanner.nextLine());
-                    if (figure != null) {
-                        figureList.add(figure);
-                        System.out.println("created: " + figure);
-                    }
-                } catch (RuntimeException e) {
-                    System.out.println("error creating figure: " + e.getMessage());
-                    System.out.print("continue creating figures? (y/n): ");
-                    if (!scanner.nextLine().trim().toLowerCase().startsWith("y")) {
-                        break;
-                    } else {
-                        count ++;
-                    }
-                }
+        if (factory instanceof StreamFigureFactory) {
+            // only close if it's a file stream factory
+            if (!chosenMethod.equals("stdin")) {
+                ((StreamFigureFactory) factory).close();
             }
         }
 
-//        if (factory instanceof StreamFigureFactory) {
-//            ((StreamFigureFactory) factory).close();
-//        }
-
-        System.out.println("created " + figureList.size() + " figures.");
+        System.out.println("created " + createdCount + " figures.");
     }
 
     private static FigureFactory createFactoryForMethod(String method) {
@@ -140,7 +127,6 @@ public class CLI {
 
             case "stdin":
                 System.out.println(instructionsForStdinInput());
-                System.out.println("enter figures (one per line):");
                 return new StreamFigureFactory(System.in);
 
             case "file":
@@ -232,42 +218,39 @@ public class CLI {
     }
 
     public static String instructionsForStdinInput() {
-    StringBuilder sb = new StringBuilder();
-    sb.append("> Ok, create a shape\n");
-    sb.append("> Type figure type + measurements\n");
-    sb.append("> Just like in the following examples:\n\n");
+        StringBuilder sb = new StringBuilder();
+        sb.append("> Ok, create a shape\n");
+        sb.append("> Type figure type + measurements\n");
+        sb.append("> Just like in the following examples:\n\n");
 
-    sb.append("   /\\   \n");
-    sb.append("  /  \\  \n");
-    sb.append(" /____\\\n");
-    sb.append("triangle 20.1 20.2 20.3\n\n");
+        sb.append("   /\\   \n");
+        sb.append("  /  \\  \n");
+        sb.append(" /____\\\n");
+        sb.append("triangle 20.1 20.2 20.3\n\n");
 
-    sb.append("  ****  \n");
-    sb.append(" *    * \n");
-    sb.append("  ****  \n");
-    sb.append("circle 5.5\n\n");
+        sb.append("  ****  \n");
+        sb.append(" *    * \n");
+        sb.append("  ****  \n");
+        sb.append("circle 5.5\n\n");
 
-    sb.append(" +----+ \n");
-    sb.append(" |    | \n");
-    sb.append(" +----+ \n");
-    sb.append("rectangle 10.1 20.2\n");
+        sb.append(" +----+ \n");
+        sb.append(" |    | \n");
+        sb.append(" +----+ \n");
+        sb.append("rectangle 10.1 20.2\n");
 
-    sb.append("Enter figures (one per line):");
-
-    return sb.toString();
-}
-
-private static void printFiguresList() {
-    if (figureList.isEmpty()) {
-        System.out.println("there are no figures to display.");
-        return;
+        return sb.toString();
     }
 
-    StringToFigure stringToFigure = new StringToFigure();
-    for (int i = 0; i < figureList.size(); i++) {
-        System.out.println(i + ". - " + figureList.get(i));
+    private static void printFiguresList() {
+        if (figureList.isEmpty()) {
+            System.out.println("there are no figures to display.");
+            return;
+        }
+
+        for (int i = 0; i < figureList.size(); i++) {
+            Figure figure = figureList.get(i);
+            System.out.println((i + 1) + ". " + figure);
+        }
     }
-}
 
 }
-
